@@ -23,12 +23,6 @@ public class CreatePostRequest {
 
     private int status;
 
-    private Timestamp createAt;
-
-    private Timestamp modifiedAt;
-
-    private Timestamp publishedAt;
-
     private String username;
 
     @JsonProperty("image_ids")

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,6 +50,12 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getListPostByUser(@PathVariable long id){
+        List<Post> listPost = postService.getListPostByUser(id);
+        return ResponseEntity.ok(listPost);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createPost(@Valid @RequestBody CreatePostRequest request){
         Post post = postService.createPost(request);
@@ -65,7 +72,7 @@ public class PostController {
     public ResponseEntity<?> deletePost(@PathVariable long id){
         postService.deletePostById(id);
 
-        return ResponseEntity.ok("Delete successfully!!");
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 }

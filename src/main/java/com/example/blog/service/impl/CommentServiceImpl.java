@@ -54,7 +54,6 @@ public class CommentServiceImpl implements CommentService {
         Post post = postRepository.findById(postId).orElseThrow(() -> new NotFoundResponse("Post Not Found With Id:" + postId));
 
         Comment comment = new Comment();
-        comment.setTitle(request.getTitle());
         comment.setContent(request.getContent());
         User user = userRepository.findByUsername(request.getUsername()).get();
         comment.setPost(post);
@@ -67,7 +66,6 @@ public class CommentServiceImpl implements CommentService {
     public Comment updateComment(long id, CreateCommentRequest request) {
         // TODO Auto-generated method stub
         Comment comment = commentRepository.findById(id).orElseThrow(() -> new NotFoundResponse("Comment Not Found With Id:" + id));
-        comment.setTitle(request.getTitle());
         comment.setContent(request.getContent());
         return commentRepository.save(comment);
     }

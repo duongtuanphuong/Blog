@@ -7,9 +7,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateCommentRequest {
+public class UpdateUserProfileReq {
+    
+    private String email;
 
-    private String content;
+    private String name;
 
-    private String username;
+    private String country;
+
+    private String address;
+
+    private String phone;
 }

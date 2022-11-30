@@ -6,6 +6,10 @@ import java.util.Optional;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.blog.entity.Image;
@@ -33,9 +37,16 @@ public class PostServiceImpl implements PostService{
     @Override
     public List<Post> getListPost() {
         // TODO Auto-generated method stub
-        return postRepository.findAll();
+        return postRepository.findAll(Sort.by("id").descending());
     }
 
+    @Override
+    public Page<Post> getPagePost(Integer pageNo, Integer pageSize, String sortBy) {
+        // TODO Auto-generated method stub
+        Pageable pageable = PageRequest.of(pageNo,pageSize,Sort.by(sortBy).descending());
+        Page<Post> listPost = postRepository.findAll(pageable);
+        return listPost;
+    }
     @Override
     public Post createPost(CreatePostRequest request) {
         // TODO Auto-generated method stub
@@ -95,5 +106,16 @@ public class PostServiceImpl implements PostService{
         post.getImages().remove(this);
         postRepository.delete(post);
     }
+
+    @Override
+    public List<Post> getListPostByUser(long id) {
+        // TODO Auto-generated method stub
+        List<Post> listPost = postRepository.getListPostByUser(id);
+        return listPost;
+    }
+
+
+
+    
     
 }
